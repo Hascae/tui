@@ -1,0 +1,29 @@
+[package]
+name = "tui-ffi"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+name = "tui_core"
+crate-type = ["cdylib", "lib"]
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+required-features = ["bindgen"]
+
+[features]
+bindgen = ["uniffi/cli"]
+
+# UniFFI's generated scaffolding is unsafe by nature, so this crate cannot inherit the
+# workspace's `unsafe_code = "forbid"`. Nothing hand-written here uses unsafe.
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[dependencies]
+tui-net = { path = "../net" }
+tui-term = { path = "../term" }
+chewing = { version = "0.13", default-features = false }
+uniffi = "0.32"

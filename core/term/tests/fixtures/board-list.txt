@@ -1,0 +1,25 @@
+
+   編號   看  板       類別   中   文   敘   述
+>     1   Gossiping    綜合 ◎[八卦] 請遵守板規                      爆
+      2   C_Chat       閒談 ◎[希洽] 動畫討論
+      3   Stock        學術 ◎[股票] 理性討論
+
+※ 文章網址: https://www.ptt.cc/bbs/Gossiping/M.1.A.1.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     4   Baseball     棒球 ◎[棒球] 例行賽
+ 選擇看板
+cursor 2,0

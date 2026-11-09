@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      TUI_ZHUYIN_DATA: ${{ github.workspace }}/android/app/src/main/assets/chewing
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            core/target
+          key: core-${{ hashFiles('core/Cargo.lock', 'core/rust-toolchain.toml') }}
+
+      - name: Fetch zhuyin dictionaries
+        run: tools/fetch-zhuyin-data.sh
+
+      - name: Format
+        working-directory: core
+        run: cargo fmt --check
+
+      - name: Lint
+        working-directory: core
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+
+      - name: Test
+        working-directory: core
+        run: cargo test --workspace --locked

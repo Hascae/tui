@@ -1,0 +1,17 @@
+.gradle/
+build/
+.kotlin/
+local.properties
+*.keystore
+*.jks
+.idea/
+*.iml
+captures/
+.DS_Store
+
+/core/target/
+
+# Produced by tools/build-core.sh and tools/fetch-zhuyin-data.sh.
+/android/core/src/main/jniLibs/
+/android/core/src/main/java/uniffi/
+/android/app/src/main/assets/chewing/
